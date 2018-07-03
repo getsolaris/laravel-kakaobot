@@ -8,7 +8,7 @@ use Goutte;
 
 class MultiMessageController extends Controller
 {
-    public function __construct($country = 'stu.sen.go.kr', $code = 'B100000599') {
+    public function __construct($country = 'stu.dge.go.kr', $code = 'D100001661') {
         $this->country = $country;
         $this->code = $code;
     }
@@ -22,6 +22,14 @@ class MultiMessageController extends Controller
             
             $text = preg_replace('/[\d]|\./',' ', $text);
             $text = preg_replace('/([\s])\1+/', ' ', $text);
+
+            /**
+             * 급식 앞에 [중식] 단어를 제거하고 싶을때 아래의 주석 해제
+             */
+
+            // $text = preg_replace('/\[[^\]]*\]/','',$text); 
+            
+            $text = preg_replace('/\( \)/','',$text);
 
             if (strstr($text, '밥')) {
                 $search = strpos($text, '밥');

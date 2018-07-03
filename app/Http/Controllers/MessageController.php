@@ -34,7 +34,7 @@ class MessageController extends Controller
         $mealCase = ['오늘 급식', '내일 급식', '돌아가기'];
         $scheduleCase = ['한달전', '이번달', '다음달', '다다음달', '다다다음달', '돌아가기'];
 
-        // $content = '오늘 급식';
+        $content = '오늘 급식';
 
         switch($content) {
             case '돌아가기': {
