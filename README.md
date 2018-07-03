@@ -59,3 +59,15 @@ public function __construct($country = 'stu.sen.go.kr', $code = 'B100000599') {
     $this->code = $code;
 }
 ```
+
+
+### 업데이트 로그
+- [18.07.03][#1] 예외 처리 추가 및 함수 인자 통일
+- [18.07.03][#2] 급식 앞에 `[중식]` 키워드 제거 및 괄호 안에 공백 존재 경우 괄호를 포함한 공백 제거
+
+
+## Support Us
+Mingeun Kim mingeun.k.k[at]gmail[dot]com
+
+## License
+MIT license
