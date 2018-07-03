@@ -50,10 +50,12 @@ class MessageController extends Controller
                 return response()->json($data);
                 break;
             }
+
             /**
              * 급식 시작
              * ['오늘 급식', '내일 급식', '돌아가기']
              */
+
             case '급식': {
                 $data = [
                     'message' => [
@@ -68,7 +70,7 @@ class MessageController extends Controller
                 break;
             }
             case '오늘 급식': {
-                $meal = $this->multiMessage->meal('오늘');
+                $meal = $this->multiMessage->meal($content);
         
                 $data = [
                     'message' => [
@@ -83,7 +85,7 @@ class MessageController extends Controller
                 break;
             }
             case '내일 급식': {
-                $meal = $this->multiMessage->meal('내일');
+                $meal = $this->multiMessage->meal($content);
         
                 $data = [
                     'message' => [
@@ -119,7 +121,7 @@ class MessageController extends Controller
                 break;
             }
             case '한달전': {
-                $schedule = $this->multiMessage->schedule('한달전');
+                $schedule = $this->multiMessage->schedule($content);
 
                 $data = [
                     'message' => [
@@ -134,7 +136,7 @@ class MessageController extends Controller
                 break;
             }
             case '이번달': {
-                $schedule = $this->multiMessage->schedule('이번달');
+                $schedule = $this->multiMessage->schedule($content);
 
                 $data = [
                     'message' => [
@@ -149,7 +151,7 @@ class MessageController extends Controller
                 break;
             }
             case '다음달': {
-                $schedule = $this->multiMessage->schedule('다음달');
+                $schedule = $this->multiMessage->schedule($content);
 
                 $data = [
                     'message' => [
@@ -164,7 +166,7 @@ class MessageController extends Controller
                 break;
             }
             case '다다음달': {
-                $schedule = $this->multiMessage->schedule('다다음달');
+                $schedule = $this->multiMessage->schedule($content);
 
                 $data = [
                     'message' => [
@@ -179,7 +181,7 @@ class MessageController extends Controller
                 break;
             }
             case '다다다음달': {
-                $schedule = $this->multiMessage->schedule('다다다음달');
+                $schedule = $this->multiMessage->schedule($content);
                 
                 $data = [
                     'message' => [
@@ -188,6 +190,25 @@ class MessageController extends Controller
                     'keyboard' => [
                         'type' => 'buttons',
                         'buttons' => $scheduleCase
+                    ]
+                ];
+                return response()->json($data);
+                break;
+            }
+
+            /**
+             * 학교 일정 끝
+             * 예외 처리 추가
+             */
+
+            default: {
+                $data = [
+                    'message' => [
+                        'text' => '초기 화면입니다.'
+                    ],
+                    'keyboard' => [
+                        'type' => 'buttons',
+                        'buttons' => $mainButtons
                     ]
                 ];
                 return response()->json($data);
