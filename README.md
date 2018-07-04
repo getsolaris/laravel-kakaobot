@@ -54,7 +54,7 @@ $ php artisan key:generate
 
 ### 코드 수정
 
-```app/Http/Controller/MultiMessageController.php``` 11번째 줄, 생성자의 매개변수(country, code)를 자신의 고등학교에 알맞게 수정합니다.
+```app/Http/Controller/MultiMessageController.php``` 11번째 줄, 생성자의 매개변수(country, code, school)를 자신의 고등학교에 알맞게 수정합니다.
 
 - country : 교육청
 - code : 학교 코드
