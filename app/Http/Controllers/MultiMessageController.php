@@ -8,13 +8,17 @@ use Goutte;
 
 class MultiMessageController extends Controller
 {
-    public function __construct($country = 'stu.dge.go.kr', $code = 'D100001661') {
+    public function __construct($country = 'stu.sen.go.kr', $code = 'B100000599', $school = 'high') {
         $this->country = $country;
         $this->code = $code;
+
+        if ($school == 'high') $this->school = 4;
+        elseif ($school == 'middle') $this->school = 3;
+        else throw new \LogicException('존재하지 않는 학교 종류입니다.');
     }
 
     public function meal($date) {
-        $url = 'https://'. $this->country . '/sts_sci_md00_001.do?schulCode=' . $this->code . '&schulCrseScCode=4&schMmealScCode=2';
+        $url = 'https://' . $this->country . '/sts_sci_md00_001.do?schulCode=' . $this->code . '&schulCrseScCode=' . $this->school . '&schMmealScCode=2';
         
         $crawler = Goutte::request('GET', $url);
         $result = $crawler->filter('tbody tr td div')->each(function ($content){
@@ -68,7 +72,7 @@ class MultiMessageController extends Controller
             $carbon = Carbon::now();
     
 
-        $url = 'https://'. $this->country . '/sts_sci_sf01_001.do?schulCode='. $this->code .'&schulCrseScCode=4&schulKndScCode=4&ay='. $carbon->year .'&mm='. $carbon->format('m');
+        $url = 'https://' . $this->country . '/sts_sci_sf01_001.do?schulCode=' . $this->code . '&schulCrseScCode=' . $this->school . '&schulKndScCode=4&ay=' . $carbon->year . '&mm=' . $carbon->format('m');
         
         $crawler = Goutte::request('GET', $url);
         $result = $crawler->filter('tbody tr td .textL')->each(function ($content){
