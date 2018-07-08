@@ -78,6 +78,8 @@ public function __construct($country = 'stu.sen.go.kr', $code = 'B100000599', $s
 - [18.07.03][#1] 예외 처리 추가 및 함수 인자 통일
 - [18.07.03][#2] 급식 앞에 `[중식]` 키워드 제거 및 괄호 안에 공백 존재 경우 괄호를 포함한 공백 제거
 - [18.07.05][#3] 학교 종류 선택 가능 (중학교, 고등학교)
+- [18.07.08][#4] MessageController 와 MultiMessageController 코드 전반적으로 수정
+    - 학교 일정 한글이 아닌 `yyyy-mm(Y-m)` 형식으로 출력
 
 
 ## Support Us
