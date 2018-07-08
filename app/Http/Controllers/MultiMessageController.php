@@ -59,20 +59,11 @@ class MultiMessageController extends Controller
     } 
 
     public function schedule($month) {
-        $carbon = Carbon::now();
-        if($month == '다음달')
-            $carbon = $carbon->addMonth();
-        elseif($month == '다다음달')
-            $carbon = $carbon->addMonth(2);
-        elseif($month == '다다다음달')
-            $carbon = $carbon->addMonth(3);
-        elseif($month == '한달전')
-            $carbon = $carbon->addMonth(-1);
-        else
-            $carbon = Carbon::now();
-    
+        if(isset($month)) {
+            $argv = explode('-', $month);
+        }
 
-        $url = 'https://' . $this->country . '/sts_sci_sf01_001.do?schulCode=' . $this->code . '&schulCrseScCode=' . $this->school . '&schulKndScCode=4&ay=' . $carbon->year . '&mm=' . $carbon->format('m');
+        $url = 'https://' . $this->country . '/sts_sci_sf01_001.do?schulCode=' . $this->code . '&schulCrseScCode=' . $this->school . '&schulKndScCode=4&ay=' . $argv[0] . '&mm=' . $argv[1];
         
         $crawler = Goutte::request('GET', $url);
         $result = $crawler->filter('tbody tr td .textL')->each(function ($content){

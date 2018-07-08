@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class MessageController extends Controller
 {
@@ -26,15 +27,16 @@ class MessageController extends Controller
     }
 
     public function index(Request $request) {
+        $carbon = Carbon::now();
         $data = json_decode($request->getContent(), true);
         $content = $data['content'];
         $mainButtons = ['급식', '학교 일정'];
 
         // 버튼 리스트
         $mealCase = ['오늘 급식', '내일 급식', '돌아가기'];
-        $scheduleCase = ['한달전', '이번달', '다음달', '다다음달', '다다다음달', '돌아가기'];
+        $scheduleCase = [Carbon::now()->addMonth(-1)->format('Y-m'), $carbon->now()->format('Y-m'), $carbon->addMonth()->format('Y-m'), $carbon->addMonth()->format('Y-m'), $carbon->addMonth()->format('Y-m'), $carbon->addMonth()->format('Y-m'), '돌아가기'];
 
-        $content = '오늘 급식';
+        // $content = '학교 일정';
 
         switch($content) {
             case '돌아가기': {
@@ -69,22 +71,7 @@ class MessageController extends Controller
                 return response()->json($data);
                 break;
             }
-            case '오늘 급식': {
-                $meal = $this->multiMessage->meal($content);
-        
-                $data = [
-                    'message' => [
-                        'text' => $meal,
-                    ],
-                    'keyboard' => [
-                        'type' => 'buttons',
-                        'buttons' => $mealCase
-                    ]
-                ];
-                return response()->json($data);
-                break;
-            }
-            case '내일 급식': {
+            case in_array($content, $mealCase): {
                 $meal = $this->multiMessage->meal($content);
         
                 $data = [
@@ -120,69 +107,9 @@ class MessageController extends Controller
                 return response()->json($data);
                 break;
             }
-            case '한달전': {
+            case in_array($content, $scheduleCase): {
                 $schedule = $this->multiMessage->schedule($content);
 
-                $data = [
-                    'message' => [
-                        'text' => $schedule,
-                    ],
-                    'keyboard' => [
-                        'type' => 'buttons',
-                        'buttons' => $scheduleCase
-                    ]
-                ];
-                return response()->json($data);
-                break;
-            }
-            case '이번달': {
-                $schedule = $this->multiMessage->schedule($content);
-
-                $data = [
-                    'message' => [
-                        'text' => $schedule,
-                    ],
-                    'keyboard' => [
-                        'type' => 'buttons',
-                        'buttons' => $scheduleCase
-                    ]
-                ];
-                return response()->json($data);
-                break;
-            }
-            case '다음달': {
-                $schedule = $this->multiMessage->schedule($content);
-
-                $data = [
-                    'message' => [
-                        'text' => $schedule,
-                    ],
-                    'keyboard' => [
-                        'type' => 'buttons',
-                        'buttons' => $scheduleCase
-                    ]
-                ];
-                return response()->json($data);
-                break;
-            }
-            case '다다음달': {
-                $schedule = $this->multiMessage->schedule($content);
-
-                $data = [
-                    'message' => [
-                        'text' => $schedule,
-                    ],
-                    'keyboard' => [
-                        'type' => 'buttons',
-                        'buttons' => $scheduleCase
-                    ]
-                ];
-                return response()->json($data);
-                break;
-            }
-            case '다다다음달': {
-                $schedule = $this->multiMessage->schedule($content);
-                
                 $data = [
                     'message' => [
                         'text' => $schedule,
@@ -204,7 +131,7 @@ class MessageController extends Controller
             default: {
                 $data = [
                     'message' => [
-                        'text' => '초기 화면입니다.'
+                        'text' => '초기화면 입니다.'
                     ],
                     'keyboard' => [
                         'type' => 'buttons',
