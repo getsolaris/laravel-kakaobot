@@ -74,8 +74,8 @@ class MultiMessageController extends Controller
 
     public function animalLuck($cases, $animal) {
         $key = array_keys($cases, $animal);
-
-        $url = 'https://fortune.nate.com/contents/freeunse/weekjiji.nate?jijiPage=0&jijiparam=' . sprintf('%02d', $key);
+        
+        $url = 'https://fortune.nate.com/contents/freeunse/weekjiji.nate?jijiPage=0&jijiparam=' . sprintf('%02d', implode('', $key));
         
         $crawler = Goutte::request('GET', $url);
 
