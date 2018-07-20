@@ -81,7 +81,7 @@ class MultiMessageController extends Controller
 
         $result = $crawler->filter('#con_box')->each(function ($content){
             $text = trim(preg_replace('/[\r\n]/', "\n", $content->text()));
-            $text = str_replace(' ', '', $text);
+            $text = str_replace('  ', '', $text);
             $text = str_replace("\n\n\n\n\n\n", '', $text);
 
             return $text;
