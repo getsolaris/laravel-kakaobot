@@ -71,4 +71,28 @@ class MultiMessageController extends Controller
         });
         return implode("\n",$result);
     }
+
+    public function animalLuck($cases, $animal) {
+        $key = array_keys($cases, $animal);
+
+        $url = 'https://fortune.nate.com/contents/freeunse/weekjiji.nate?jijiPage=0&jijiparam=' . sprintf('%02d', $key);
+        
+        $crawler = Goutte::request('GET', $url);
+
+        $result = $crawler->filter('#con_box')->each(function ($content){
+            $text = trim(preg_replace('/[\r\n]/', "\n", $content->text()));
+            $text = str_replace(' ', '', $text);
+            $text = str_replace("\n\n\n\n\n\n", '', $text);
+
+            return $text;
+        });
+
+        return implode('', $result);
+    }
+
+    public function intLuck() {
+        $num = rand(1, 100);
+
+        return $num;
+    }
 }

@@ -9,7 +9,7 @@ class KeyboardController extends Controller
     public function index() {
         return response()->json([
             'type' => 'buttons',
-            'buttons' => ['급식', '학교 일정']
+            'buttons' => ['급식', '학교 일정', '운세']
         ]);
     }
 }

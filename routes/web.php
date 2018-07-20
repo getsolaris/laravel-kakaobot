@@ -15,3 +15,5 @@ Route::get('keyboard/message', 'MessageController@index');
 Route::post('keyboard/message', 'MessageController@index');
 
 Route::get('keyboard/{id}', 'KeyboardController@index');
+
+Route::get('kakao', 'CenterController@index');
