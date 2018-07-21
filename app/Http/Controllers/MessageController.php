@@ -7,11 +7,15 @@ use Carbon\Carbon;
 
 class MessageController extends Controller
 {
+    
+    const BUTTON = ['급식', '학교 일정', '운세'];
+    
     protected $multiMessage;
     public function __construct(MultiMessageController $multiMessage)
     {
         $this->multiMessage = $multiMessage;
     }
+
     public function getContent($asResource = false) {
         if (false === $this->content || (true === $asResource && null !== $this->content)) 
             throw new \LogicException('호출은 한번만 가능합니다.');
@@ -26,11 +30,17 @@ class MessageController extends Controller
         return $this->content;
     }
 
+    public function keyboard() {
+        return response()->json([
+            'type' => 'buttons',
+            'buttons' => self::BUTTON
+        ]);
+    }
+
     public function index(Request $request) {
         $carbon = Carbon::now();
         $data = json_decode($request->getContent(), true);
         $content = $data['content'];
-        $mainButtons = ['급식', '학교 일정', '운세'];
 
         // 버튼 리스트
         $mealCase = ['오늘 급식', '내일 급식', '돌아가기'];
@@ -48,7 +58,7 @@ class MessageController extends Controller
                     ],
                     'keyboard' => [
                         'type' => 'buttons',
-                        'buttons' => $mainButtons
+                        'buttons' => self::BUTTON
                     ]
                 ];
                 return response()->json($data);
@@ -153,7 +163,7 @@ class MessageController extends Controller
                         ],
                         'keyboard' => [
                             'type' => 'buttons',
-                            'buttons' => $mainButtons
+                            'buttons' => self::BUTTON
                         ]
                     ];
                     return response()->json($data);
@@ -182,7 +192,7 @@ class MessageController extends Controller
                     ],
                     'keyboard' => [
                         'type' => 'buttons',
-                        'buttons' => $mainButtons
+                        'buttons' => self::BUTTON
                     ]
                 ];
                 return response()->json($data);
@@ -204,7 +214,7 @@ class MessageController extends Controller
                     ],
                     'keyboard' => [
                         'type' => 'buttons',
-                        'buttons' => $mainButtons
+                        'buttons' => self::BUTTON
                     ]
                 ];
                 return response()->json($data);
