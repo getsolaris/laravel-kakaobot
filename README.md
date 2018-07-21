@@ -83,6 +83,8 @@ public function __construct($country = 'stu.sen.go.kr', $code = 'B100000599', $s
 - [18.07.08][#4] MessageController 와 MultiMessageController 코드 전반적으로 수정
     - 학교 일정 한글이 아닌 `yyyy-mm(Y-m)` 형식으로 출력
 - [18.07.21][#5] 운세 기능 추가(숫자 운세, 띠별 오늘의 운세)
+- [18.07.21][#6] KeyboardController 키보드처리 메소드 index 를 MessageController keyboard 메소드로 변경
+    - `$mainButtons` 를 상수처리
 
 
 ## Support Us
