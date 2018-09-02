@@ -8,7 +8,7 @@ use Goutte;
 
 class MultiMessageController extends Controller
 {
-    public function __construct($country = 'stu.sen.go.kr', $code = 'B100000599', $school = 'high') {
+    public function __construct($country = 'stu.sen.go.kr', $code = 'B100000481', $school = 'high') {
         $this->country = $country;
         $this->code = $code;
 
@@ -23,10 +23,6 @@ class MultiMessageController extends Controller
         $crawler = Goutte::request('GET', $url);
         $result = $crawler->filter('tbody tr td div')->each(function ($content){
             $text = $content->text();
-            
-            $text = preg_replace('/[\d]|\./',' ', $text);
-            $text = preg_replace('/([\s])\1+/', ' ', $text);
-
             /**
              * 급식 앞에 [중식] 단어를 제거하고 싶을때 아래의 주석 해제
              */
@@ -46,15 +42,18 @@ class MultiMessageController extends Controller
         });
         
 
+        $result = array_values(array_filter($result));
+        $result = preg_replace('/[\d]|\./',' ', $result);
+        $result = preg_replace('/([\s])\1+/', ' ', $result);
+
         switch($date) {
             case '오늘 급식': 
-                $content = $result[Carbon::today()->format('j')-1];
+                $content = trim($result[Carbon::today()->format('j')-2]);
                 return empty($content) ? '오늘 급식이 없습니다.' : $content;
-            
+
             case '내일 급식': 
-                $content = $result[Carbon::tomorrow()->format('j')-1];
+                $content = trim($result[Carbon::tomorrow()->format('j')-2]);
                 return empty($content) ? '내일 급식이 없습니다.' : $content;
-            
         }
     } 
 
