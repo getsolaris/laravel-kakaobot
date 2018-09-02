@@ -48,11 +48,11 @@ class MultiMessageController extends Controller
 
         switch($date) {
             case '오늘 급식': 
-                $content = trim($result[Carbon::today()->format('j')-2]);
+                $content = trim($result[Carbon::today()->format('j')-1]);
                 return empty($content) ? '오늘 급식이 없습니다.' : $content;
 
             case '내일 급식': 
-                $content = trim($result[Carbon::tomorrow()->format('j')-2]);
+                $content = trim($result[Carbon::tomorrow()->format('j')-1]);
                 return empty($content) ? '내일 급식이 없습니다.' : $content;
         }
     } 
