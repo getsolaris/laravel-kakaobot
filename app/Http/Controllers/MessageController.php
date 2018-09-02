@@ -48,7 +48,7 @@ class MessageController extends Controller
         $luckCase = ['숫자 운세', '오늘 운세'];
         $luckAnimalsCase = ['쥐띠', '소띠', '호랑이띠','토끼띠', '용띠', '뱀띠', '말띠', '양띠', '원숭이띠', '닭띠', '개띠', '돼지띠'];
 
-        $content = '내일 급식';
+        // $content = '내일 급식';
 
         switch($content) {
             case '돌아가기': {
