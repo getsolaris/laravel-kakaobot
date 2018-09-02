@@ -85,7 +85,7 @@ public function __construct($country = 'stu.sen.go.kr', $code = 'B100000599', $s
 - [18.07.21][#5] 운세 기능 추가(숫자 운세, 띠별 오늘의 운세)
 - [18.07.21][#6] KeyboardController 키보드처리 메소드 index 를 MessageController keyboard 메소드로 변경
     - `$mainButtons` 를 상수처리
-- [18.09.03][#7] 급식 크롤링 후 출력 방식 변경 (전: 0번째 테이블 부터 날짜 별로 출력)
+- [18.09.03][#7, #7.1] 급식 크롤링 후 출력 방식 변경 (전: 0번째 테이블 부터 날짜 별로 출력)
     - (후: 급식 테이블에서 날짜가 시작되는 부분 부터 출력)
 
 ## Support Us
